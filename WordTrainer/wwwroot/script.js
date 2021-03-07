@@ -1,4 +1,6 @@
-class Word {
+
+
+ class Word {
     constructor(wordID, text, rank, translation, isForgoten, favourite, examples) {
         this.wordID = wordID;
         this.text = text;
@@ -32,6 +34,6 @@ class Word {
     }
 }
 
-
+export {Word}
 
 

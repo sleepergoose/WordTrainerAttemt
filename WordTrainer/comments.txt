@@ -1,0 +1,15 @@
+﻿        var word = Word.parse(temp);
+
+        console.log(word);
+
+
+
+   // var json = JSON.stringify(user);
+    var request = new XMLHttpRequest();
+    request.open("POST", "/Home/Checking");
+    request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200)
+            document.getElementById("output").innerHTML = request.responseText;
+    }
+    request.send(JSON.stringify(temp[0]));

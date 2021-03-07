@@ -15,6 +15,18 @@ namespace WordTrainer.Models
             new Word { WordID = 2, Text = "work",
                 Translation = new List<string> { "работа", "труд", "произведение", "дело", "дела", "работать", "трудиться", "действовать" },
                 Rank = Rank.Unknown, Examples = new List<string> { "I work as engineer", "I work very hard", "My work is interesting", "New work is my hope" } },
+
+            new Word { WordID = 3, Text = "jaw",
+                Translation = new List<string> { "челюсть"},
+                Rank = Rank.Unknown, Examples = new List<string> { "My jaws", "Shark's jaws", "My bottom jaw is ill" } },
+
+            new Word { WordID = 4, Text = "perpetual",
+                Translation = new List<string> { "вечный", "непрерывный"},
+                Rank = Rank.Unknown, Examples = new List<string> { "Perpetual engine", "perpetual smile", "The girl with a perpetual smile" } },
+
+            new Word { WordID = 5, Text = "wife",
+                Translation = new List<string> { "жена", "женщина", "супруга"},
+                Rank = Rank.Unknown, Examples = new List<string> { "Have you met my wife?", "He met his wife at work.", "He met his wife at university." } },
         };     
     }
 }
