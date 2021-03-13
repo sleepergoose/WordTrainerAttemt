@@ -1,0 +1,21 @@
+﻿@model WordTrainer.Models.Word
+
+    <div class="container py-3">
+        <div class="card p-2">
+            <h3 class="card-title h3">@Model.Text</h3>
+            <div class="pl-3">
+                <p>Перевод:</p>
+                <p class="card-text font-italic pl-3">@Model.Translation</p>
+                <p>Примеры:</p>
+                <p class="card-text">
+                    @{
+                        var arr = Model.Examples.Split(".");
+                        foreach (var item in arr)
+                        {
+                        <p class="py-0 pl-3">@item</p>
+                    }
+                    }
+                    </p>
+                </div>      
+        </div>
+    </div> 

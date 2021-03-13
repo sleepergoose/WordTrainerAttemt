@@ -17,12 +17,12 @@ namespace WordTrainer.Controllers
     public class HomeController : Controller
     {
         private IWordRepository repository;
-        private List<Word> words;
+
         public HomeController(IWordRepository repo)
         {
             repository = repo;
         }
-        public IActionResult Index()
+        public  IActionResult Index()
         {
             return View(repository.Words);
         }

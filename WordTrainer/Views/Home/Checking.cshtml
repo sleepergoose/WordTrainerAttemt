@@ -1,28 +1,33 @@
 ﻿@model IEnumerable<WordTrainer.Models.Word>
 
-<div class="container my-3 pt-2">
 
-    <div class="py-2">
+
+<div class="container my-5 pt-2">
+
+    <div class="py-2 pb-4">
         <div class="progress" style="height: 20px;">
-            <div id="scores" class="progress-bar bg-secondary" role="progressbar" 
+            <div id="scores" class="progress-bar bg-secondary" role="progressbar"
                  style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group pb-0">
         <div class="row">
-            <div class="col-12 text-center">
-                <h3 class="h3" id="word"></h3>
+            <div class="col-12 text-center ">
+                <h3 class="h3  text-secondary" id="word"
+                    style="font-size: 20pt; 
+                        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"></h3>
             </div>
         </div>
     </div>
-
+    
     <div class="form-group">
-        <input type="text" class="form-control text-center" style="font-size: 20pt;" name="trans" id="trans" />
+        <input type="text" class="form-control text-center" 
+               style="font-size: 20pt; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" name="trans" id="trans" />
     </div>
 
     <div class="form-group text-center">
-        <button type="submit" class="btn btn-secondary" id="btn">Check</button>
+        <button type="submit" class="btn btn-dark" id="btn">Check</button>
     </div>
 </div>
 
@@ -48,8 +53,8 @@
         }
     });
 
-    // get data
-    var temp = JSON.parse('@Json.Serialize(@Model)');
+    // get data from local storage
+    var temp = JSON.parse(localStorage.getItem("model"));
     var arr = [];
 
     for (const i of temp) {
@@ -67,43 +72,47 @@
     function load() {
         var question = arr[counter];
         word.innerText = question.text;
-        // trans.innerText = "";
+        trans.value = "";
+        trans.focus();
     }
     load();
 
     btn.addEventListener("click", btnCallback);
     function btnCallback(e) {
-        var getTrans = trans.value;
-        if (arr[counter].translation.includes(getTrans)) {
-
-            points += 1;
-            var tempScores = points * 100 / ammount;
-            console.log(tempScores);
-            scores.innerText = tempScores.toFixed(1) + '%';
-            scores.style.width = tempScores + '%';
-            scores.attributes["aria-valuenow"].value = tempScores;
-            
-
-            if (counter < ammount - 1) {
-                counter++;
-                load();
-            }
-            else {
-                trans.value = "";
-                trans.setAttribute('disabled', 'true');
-                word.value = "";
-            }
+        var getTrans = trans.value.toLowerCase().trim();
+        if (getTrans === "") {
+            e.preventDefault();
         }
         else {
-            if (counter < ammount - 1) {
-                counter++;
-                load();
+            console.log(arr[counter].translation.toLowerCase().split(","));
+            if (arr[counter].translation.toLowerCase().split(",").includes(getTrans) || arr[counter].translation.toLowerCase().split(",").includes(" " + getTrans)) {
+                
+                points += 1;
+                var tempScores = points * 100 / ammount;
+                 scores.innerText = tempScores.toFixed(1) + '%';
+                scores.style.width = tempScores + '%';
+                scores.attributes["aria-valuenow"].value = tempScores;
+
+                if (counter < ammount - 1) {
+                    counter++;
+                    load();
+                }
+                else {
+                    trans.value = "";
+                    trans.setAttribute('disabled', 'true');
+                    word.value = "";
+                }
             }
             else {
-                trans.value = "";
-                word.value = "";
+                if (counter < ammount - 1) {
+                    counter++;
+                    load();
+                }
+                else {
+                    trans.value = "";
+                    word.value = "";
+                }
             }
         }
     }
-
 </script>

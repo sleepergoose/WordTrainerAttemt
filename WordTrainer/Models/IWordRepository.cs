@@ -4,6 +4,7 @@ namespace WordTrainer.Models
 {
     public interface IWordRepository
     {
-        public IEnumerable<Word> Words { get; }
+        IEnumerable<Word> Words { get; }
+        void Add(Word word);
     }
 }

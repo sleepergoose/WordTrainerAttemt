@@ -1,0 +1,33 @@
+﻿<!--Words/Index-->
+@model IEnumerable<WordTrainer.Models.Word>
+
+<div class="container py-3">
+    <table class="table table-dark table-striped table-hover">
+        <thead class="thead-dark">
+            <tr
+                <th>#</th>
+                <th>Word</th>
+                <th>Translate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int RowCounter = 0;
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="font-weight-bold">                                        
+                            <h4 class="h4"><span>@(++RowCounter). </span>@item.Text</h4>
+                        </td>
+                        <td>@item.Translation</td>
+                    </tr>
+                    <tr>
+                        <td class="font-italic text-right">Examples:</td>
+                        <td>@item.Examples</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

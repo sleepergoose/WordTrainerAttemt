@@ -6,8 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WordTrainer.Models
 {
-    public class ApplicationContext
+    public class ApplicationContext : DbContext
     {
-        public DbSet<Word> EnglishWords { get; set; }
+        public DbSet<Word> Words { get; set; }
+
+        public ApplicationContext(DbContextOptions<ApplicationContext> options): base(options)
+        {
+            Database.EnsureCreated();   // создаем базу данных при первом обращении
+        }
     }
+
+
 }

@@ -1,0 +1,53 @@
+﻿@model WordTrainer.Models.Word
+
+<div class="container py-3">
+
+    <h3 class="h3 text-center">Add new word right here</h3>
+
+    <form asp-action="AddWord" asp-controller="Words" method="post">
+        <div class="form-group">
+            <label asp-for="Text">Word</label>
+            <input class="form-control" type="text" name="Text" asp-for="Text" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Translation">Translation</label>
+            <input class="form-control" type="text" name="Translation" asp-for="Translation" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Examples">Examples</label>
+            <input class="form-control" type="text" name="Examples" asp-for="Examples" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" id="submitButton" class="btn btn-primary" value="Add" />
+        </div>
+    </form>
+</div>
+
+
+<script>
+    var submitButton = document.getElementById("submitButton");
+    var inputText = document.getElementsByName("Text")[0];
+    var inputTranslation = document.getElementsByName("Translation")[0];
+    var inputExamples = document.getElementsByName("Examples")[0];
+
+    // Adding events listeners
+    function submitButtonAutoPress(event) {
+        if (event.keyCode == 13) {
+            submitButton.click();
+        }
+    }
+    inputExamples.addEventListener("keyup", submitButtonAutoPress);
+
+
+    // Checking
+    function submitButtonCallback(event) {
+        if (inputText.value == "" || inputTranslation.value == "" || inputExamples.value == "") {
+            event.preventDefault();
+        }
+    }
+    submitButton.addEventListener("click", submitButtonCallback);
+
+</script>

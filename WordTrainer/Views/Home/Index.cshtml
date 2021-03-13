@@ -1,9 +1,13 @@
-﻿@model IEnumerable<WordTrainer.Models.Word>
+﻿<!--The main page: Home/Index-->
+
+@model IEnumerable<WordTrainer.Models.Word>
 @using WordTrainer.Models;
 
 <br />
-<div class="container">
-    @{ 
+
+<!--
+<div class="container mt-5">
+    {
         if (Model == null)
         {
             <h3>Dictionary is empty!</h3>
@@ -19,22 +23,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    foreach (var item in Model)
                     {
                     <tr>
-                        <td class="font-weight-bold">@item.Text</td>
-                        <td>
-                            @foreach (var w in item.Translation)
-                            {
-                                @w<br />
-                            }
-                        </td>
-                        <td>
-                            @foreach (var w in item.Examples)
-                            {
-                                @w<br />
-                            }
-                        </td>
+                        <td class="font-weight-bold">item.Text</td>
+                        <td>item.Translation</td>
+                        <td>item.Examples</td>
                     </tr>
                     }
                 </tbody>
@@ -42,5 +36,11 @@
         }
     }
 </div>
+-->
 
 
+<script>
+    // Set date from Model to localStorage
+    var model = '@Json.Serialize(@Model)';
+    localStorage.setItem("model", model);
+</script>
