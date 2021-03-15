@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<WordTrainer.Models.Word>
 
 
-
 <div class="container my-5 pt-2">
 
     <div class="py-2 pb-4">
@@ -41,11 +40,12 @@
 
     import { Word } from '/script.js';
 
-    var word = document.getElementById("word");
-    var trans = document.getElementById("trans");
+    var wordBox = document.getElementById("word");
+    var transBox = document.getElementById("trans");
     var btn = document.getElementById("btn");
     var scores = document.getElementById("scores");
 
+    // Adds EventListener for 'Enter' key press
     trans.addEventListener("keyup", function (e) {
         if (e.keyCode == 13) {
             btn.click();
@@ -53,7 +53,7 @@
         }
     });
 
-    // get data from local storage
+    // Gets data from local storage and casts them to Word instances
     var temp = JSON.parse(localStorage.getItem("model"));
     var arr = [];
 
@@ -61,6 +61,7 @@
         arr.push(Word.parse(i));
     }
 
+    // Words ammount 
     var ammount = arr.length;
 
     scores.attributes["aria-valuemax"].value = 100;
@@ -69,23 +70,31 @@
     var counter = 0;
     var points = 0;
 
+
+    // Loads new word in trainer
+    // Crearing form's input 'transBox'
     function load() {
         var question = arr[counter];
-        word.innerText = question.text;
-        trans.value = "";
-        trans.focus();
+        wordBox.innerText = question.text;
+        transBox.value = "";
+        transBox.focus();
     }
     load();
 
+    // Adds EventListener to 'btn' on 'click'
     btn.addEventListener("click", btnCallback);
+
+    // Main 'btn' function
     function btnCallback(e) {
-        var getTrans = trans.value.toLowerCase().trim();
-        if (getTrans === "") {
+        // Gets value from 'transBox'
+        var trans = transBox.value.toLowerCase().trim();
+        // if trans is empty - interrupt event executing
+        if (trans === "") {
             e.preventDefault();
         }
         else {
-            console.log(arr[counter].translation.toLowerCase().split(","));
-            if (arr[counter].translation.toLowerCase().split(",").includes(getTrans) || arr[counter].translation.toLowerCase().split(",").includes(" " + getTrans)) {
+            // If translation is right
+            if (arr[counter].translation.toLowerCase().split(",").includes(trans) || arr[counter].translation.toLowerCase().split(",").includes(" " + trans)) {
                 
                 points += 1;
                 var tempScores = points * 100 / ammount;
@@ -98,19 +107,22 @@
                     load();
                 }
                 else {
-                    trans.value = "";
-                    trans.setAttribute('disabled', 'true');
-                    word.value = "";
+                    transBox.value = "";
+                    transBox.setAttribute('disabled', 'true');
+                    wordBox.value = "";
                 }
             }
+            // If translation is not right
             else {
+                // If there is at least one word in the storage then load it into 'wordBox'
                 if (counter < ammount - 1) {
                     counter++;
                     load();
                 }
+                // If there isn't any word in the storage
                 else {
-                    trans.value = "";
-                    word.value = "";
+                    transBox.value = "";
+                    wordBox.value = "";
                 }
             }
         }

@@ -18,27 +18,19 @@ namespace WordTrainer.Controllers
     {
         private IWordRepository repository;
 
-        public HomeController(IWordRepository repo)
-        {
-            repository = repo;
-        }
-        public  IActionResult Index()
-        {
-            return View(repository.Words);
-        }
+        public HomeController(IWordRepository repo) => repository = repo;
+        
+        public  IActionResult Index() => View(repository.Words);
 
         [HttpGet]
-        public IActionResult Checking() => View(repository.Words.ToList());
+        public IActionResult Train() => View(repository.Words.ToList());
 
-        [HttpPost]
-        public IActionResult Checking(string text)
-        {
-            //var buf = new byte[100];
-            //var res = await GetListOfStringsFromStream(HttpContext.Request.Body);
-
-            return View();
-        }
-
+        // Do not use in this time
+        /// <summary>
+        /// Reads data from Request's Body
+        /// </summary>
+        /// <param name="requestBody">Data from Request's Body </param>
+        /// <returns>Data in a specific format</returns>
         private async Task<string> GetListOfStringsFromStream(Stream requestBody)
         {
             StringBuilder builder = new StringBuilder();
