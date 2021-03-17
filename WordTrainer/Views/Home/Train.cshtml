@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<WordTrainer.Models.Word>
 
 
-<div class="container my-5 pt-2">
+<div class="container top-15">
 
     <div class="py-2 pb-4">
         <div class="progress" style="height: 20px;">
-            <div id="scores" class="progress-bar bg-secondary" role="progressbar"
+            <div id="scores" class="progress-bar bg-info" role="progressbar"
                  style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
@@ -26,15 +26,27 @@
     </div>
 
     <div class="form-group text-center">
-        <button type="submit" class="btn btn-dark" id="btn">Check</button>
+        <button type="button" class="btn btn-default btn-lg mx-2" id="btnExample"><span>&#8801</span></button>
+        <button type="submit" class="btn btn-info btn-lg mx-2" id="btnCheck">Check</button>
+        <button type="button" class="btn btn-default btn-lg mx-2" id="btnTranslate"><span>&#8801</span></button>
     </div>
+    <br />
+    <div id="toolTip" class="form-group">
+
+    </div>
+
 </div>
 
 <div id="output">
 
 </div>
 
-
+<script>
+    // Set date from Model to localStorage
+    localStorage.clear();
+    var model = '@Json.Serialize(@Model)';
+    localStorage.setItem("model", model);
+</script>
     
 <script type="module">
 
@@ -42,13 +54,16 @@
 
     var wordBox = document.getElementById("word");
     var transBox = document.getElementById("trans");
-    var btn = document.getElementById("btn");
+    var btnExample = document.getElementById("btnExample");
+    var btnCheck = document.getElementById("btnCheck");
+    var btnTranslate = document.getElementById("btnTranslate");
     var scores = document.getElementById("scores");
+    var toolTip = document.getElementById("toolTip");
 
     // Adds EventListener for 'Enter' key press
     trans.addEventListener("keyup", function (e) {
         if (e.keyCode == 13) {
-            btn.click();
+            btnCheck.click();
             this.value = "";
         }
     });
@@ -64,25 +79,43 @@
     // Words ammount 
     var ammount = arr.length;
 
+    // Create Set of unique values
+    var uniqueSet = new Set();
+    var crowlerArray = [];
+    while (uniqueSet.size < ammount) {
+        var num = Math.floor(Math.random() * ammount);
+        uniqueSet.add(num);
+    }
+    uniqueSet.forEach(p => crowlerArray.push(p));
+
     scores.attributes["aria-valuemax"].value = 100;
 
     // actions
     var counter = 0;
     var points = 0;
-
-
+    
     // Loads new word in trainer
     // Crearing form's input 'transBox'
     function load() {
-        var question = arr[counter];
-        wordBox.innerText = question.text;
-        transBox.value = "";
-        transBox.focus();
+        counter = crowlerArray.pop();
+        if (counter != undefined) {
+            var question = arr[counter];
+            wordBox.innerText = question.text;
+            transBox.value = "";
+            toolTip.innerHTML = "";
+            transBox.focus();
+        }
+        else {
+            wordBox.innerText = `Work's done! ${points} words are right / ${ammount - points} words are wrong`;
+            transBox.value = "";
+            toolTip.innerHTML = "";
+            transBox.setAttribute("disabled", "true");
+        }
     }
     load();
 
-    // Adds EventListener to 'btn' on 'click'
-    btn.addEventListener("click", btnCallback);
+    // Adds EventListener for 'btnCheck' on 'click'
+    btnCheck.addEventListener("click", btnCallback);
 
     // Main 'btn' function
     function btnCallback(e) {
@@ -94,37 +127,33 @@
         }
         else {
             // If translation is right
-            if (arr[counter].translation.toLowerCase().split(",").includes(trans) || arr[counter].translation.toLowerCase().split(",").includes(" " + trans)) {
-                
+            if (arr[counter].translation.toLowerCase().split(",").includes(trans) || arr[counter].translation.toLowerCase().split(",").includes(" " + trans)) { 
+                // Progress Bar section
                 points += 1;
                 var tempScores = points * 100 / ammount;
-                 scores.innerText = tempScores.toFixed(1) + '%';
+                scores.innerText = tempScores.toFixed(1) + '%';
                 scores.style.width = tempScores + '%';
                 scores.attributes["aria-valuenow"].value = tempScores;
-
-                if (counter < ammount - 1) {
-                    counter++;
-                    load();
-                }
-                else {
-                    transBox.value = "";
-                    transBox.setAttribute('disabled', 'true');
-                    wordBox.value = "";
-                }
+ 
+                load();
+                transBox.value = "";
             }
             // If translation is not right
             else {
-                // If there is at least one word in the storage then load it into 'wordBox'
-                if (counter < ammount - 1) {
-                    counter++;
-                    load();
-                }
-                // If there isn't any word in the storage
-                else {
-                    transBox.value = "";
-                    wordBox.value = "";
-                }
+                load();
             }
         }
     }
+
+
+    // Adds EventListener for 'btnTranslate'
+    btnTranslate.addEventListener("click", function (event) {
+        toolTip.innerHTML = "<p><span>&#10004;</span>" + arr[counter].translation + "</p>";
+    });
+
+    // Adds EventListener for 'btnExample'
+    btnExample.addEventListener("click", function (event) {
+        toolTip.innerHTML = "";
+        arr[counter].examples.split(".").filter(p => p !== " ").forEach(p => toolTip.innerHTML += `<p><span>&#10004;</span> ${p.trim() === "" ? "There are not more examples" : p.trim()}</p>`);
+    });
 </script>

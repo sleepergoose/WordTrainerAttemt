@@ -3,40 +3,39 @@
 @model IEnumerable<WordTrainer.Models.Word>
 @using WordTrainer.Models;
 
-<br />
-
-<!--
-<div class="container mt-5">
-    {
-        if (Model == null)
-        {
-            <h3>Dictionary is empty!</h3>
-        }
-        else
-        {
-            <table class="table table-striped table-bordered table-hovered">
-                <thead class="bg-primary">
-                    <tr >
-                        <th class="text-center">Word</th>
-                        <th class="text-center">Translation</th>
-                        <th class="text-center">Examples</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    foreach (var item in Model)
-                    {
-                    <tr>
-                        <td class="font-weight-bold">item.Text</td>
-                        <td>item.Translation</td>
-                        <td>item.Examples</td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        }
-    }
+<div class="container top-15">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Words Trainer</h1>
+        <p class="lead">This website allows you to train your memory. </p>
+    </div>
 </div>
--->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Trainer</h3>
+            <p>
+                Click 'Trainer' in the menu above to check how you know different English words
+                and phrases.
+            </p>
+            <p><a asp-action="Train" asp-controller="Home" class="btn btn-secondary">Go ahead</a></p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Add Word</h3>
+            <p>
+                Click 'Add Word' in the menu above to add you own new English words and phrases. 
+            </p>
+            <p><a asp-action="Train" asp-controller="Home" class="btn btn-secondary">Go ahead</a></p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Search</h3>
+            <p>
+                Click 'Search' in the menu above to search a neccessary word into your vocabulary.
+            </p>
+            <p><a asp-action="Train" asp-controller="Home" class="btn btn-secondary">Go ahead</a></p>
+        </div>
+    </div>
+</div>
 
 
 <script>
