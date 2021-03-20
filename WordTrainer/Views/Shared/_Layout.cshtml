@@ -10,7 +10,7 @@
 <body>
     <!--Navigation menu-->
     <div>
-        <nav class="navbar navbar-expand-lg navbar-light text-dark bg-light fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
                 <!--Brand-->
                 <a asp-action="Index" asp-controller="Home" class="navbar-brand font-weight-bold">Words Trainer</a>
@@ -19,7 +19,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <!--Menu-->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-lg-0">
                         <!--Item 1-->
                         <li class="nav-item">
@@ -31,11 +31,11 @@
                         </li>
                         <!--Item 3-->
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("AddWord", "Words")">Add word</a>
+                            <a class="nav-link" href="@Url.Action("AddWord", "Words")">Add</a>
                         </li>
                         <!--Item 4-->
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("Index", "Words")">List</a>
+                            <a class="nav-link" href="@Url.Action("List", "Words")">List</a>
                         </li>
                         <!--Item 5-->
                         <li class="nav-item">

@@ -23,16 +23,21 @@
         <div class="col-sm-4">
             <h3>Add Word</h3>
             <p>
-                Click 'Add Word' in the menu above to add you own new English words and phrases. 
+                Click 'Add' in the menu above to add you own new English words and phrases. 
             </p>
-            <p><a asp-action="Train" asp-controller="Home" class="btn btn-secondary">Go ahead</a></p>
+            <p><a asp-action="AddWord" asp-controller="Words" class="btn btn-secondary">Go ahead</a></p>
         </div>
         <div class="col-sm-4">
             <h3>Search</h3>
             <p>
                 Click 'Search' in the menu above to search a neccessary word into your vocabulary.
             </p>
-            <p><a asp-action="Train" asp-controller="Home" class="btn btn-secondary">Go ahead</a></p>
+            <p><a asp-action="Search" asp-controller="Words" class="btn btn-secondary">Go ahead</a></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+                <p class="h6 text-center mt-3 text-secondary">@await Component.InvokeAsync("PocoSummary")</p>
         </div>
     </div>
 </div>

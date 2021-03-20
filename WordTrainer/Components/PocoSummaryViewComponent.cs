@@ -14,7 +14,7 @@ namespace WordTrainer.Components
         
         public string Invoke()
         {
-            return $@"{repository.Words.Count()} words";
+            return $@"There are {repository.Words.Count()} words and phrases in the storage";
         }
     }
 }

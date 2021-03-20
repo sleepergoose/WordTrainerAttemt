@@ -8,17 +8,17 @@ using WordTrainer.Models;
 
 namespace WordTrainer.Controllers
 {
-    public class Words : Controller
+    public class WordsController : Controller
     {
         IWordRepository repository;
 
-        public Words(IWordRepository repo)
+        public WordsController(IWordRepository repo)
         {
             repository = repo;
         }
 
         [HttpGet]
-        public IActionResult Index() => View(repository.Words);
+        public IActionResult List() => View(repository.Words);
         
         // Add word section
         [HttpGet]
@@ -32,7 +32,7 @@ namespace WordTrainer.Controllers
                 //if (repository.Words.Where(p => p.Text.Trim() == word.Text.Trim()).Count() == 0) 
                     repository.Add(word);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("List");
         }
 
         // Search word section

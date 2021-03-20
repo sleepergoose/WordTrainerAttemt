@@ -36,7 +36,11 @@
     var wordBox = document.getElementById("wordBox");
     var translationBox = document.getElementById("translationBox");
     var examplesBox = document.getElementById("examplesBox");
-    
+    var wordPresenter = document.getElementById("word-presenter");
+
+    // Set focus on searchBox
+    searchBox.focus();
+
     // Adds EventListener for 'Enter' key press
     searchBox.addEventListener("keyup", function (e) {
         if (e.keyCode == 13) {
@@ -71,12 +75,14 @@
                     }
                     return res;
                 })();
+                wordPresenter.setAttribute("style", "display:block");
                 searchBox.value = "";
                 searchBox.focus();
             }
             else {
                 wordBox.innerText = "Such word does not exist in the storage";
                 searchBox.focus();
+                wordPresenter.setAttribute("style", "display:none;");
                 event.preventDefault();
             }
         }
