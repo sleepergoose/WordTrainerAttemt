@@ -1,10 +1,12 @@
 ﻿@model WordTrainer.Models.Word
 
+
+
 <div class="container top-15">
 
     <h3 class="h3 text-center">Add new word right here</h3>
 
-    <form asp-action="AddWord" asp-controller="Words" method="post">
+    <form  id="addForm" method="post">
         <div class="form-group">
             <label asp-for="Text">Word</label>
             <input class="form-control" type="text" name="Text" asp-for="Text" />
@@ -16,15 +18,88 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Examples">Examples</label>           
+            <label asp-for="Examples">Examples</label>
             <textarea name="Examples" cols="50" class="form-control" rows="4" asp-for="Examples"></textarea>
         </div>
 
         <div class="form-group">
-            <input type="submit" id="submitButton" class="btn btn-info btn-lg" value="Add" />
+            <input  id="submitButton" data-toggle="modal" data-target="#exampleModalLive" class="btn btn-info btn-lg" value="Add" />
         </div>
     </form>
+
+
 </div>
+
+<div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalTranslation">Woohoo, you're reading this text in a modal!</p>
+                <p id="modalExamples">Woohoo, you're reading this text in a modal!</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="btnModalAdmit" type="button" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script>
+    var text = document.getElementsByName("Text")[0];
+    var examples = document.getElementsByName("Examples")[0];
+    var translation = document.getElementsByName("Translation")[0];
+
+
+    
+        $(document).ready(function () {
+
+            $('#submitButton').click(function () {
+                var exampleModalLiveLabel = document.getElementById("exampleModalLiveLabel");
+                var modalTranslation = document.getElementById("modalTranslation");
+                var modalExamples = document.getElementById("modalExamples");
+
+                exampleModalLiveLabel.innerText = text.value;
+                modalTranslation.innerText = translation.value;
+                modalExamples.innerText = examples.value;
+            });
+
+
+
+            $('#btnModalAdmit').click(function () {
+              $.ajax({
+
+                url: "@Url.Action("Add", "Words")",
+                type: "POST",
+                data: $('#addForm').serialize(),
+                dataType: "html",
+                success: function (data) {
+                    result = $.parseJSON(data);
+                    console.log(result);  
+                    text.value = "";
+                    examples.value = "";
+                    translation.value = "";
+                },
+                failure: function () {
+                    console.log("error");
+                }
+            });
+            });
+        });
+
+
+</script>
 
 
 <script>
@@ -51,7 +126,6 @@
             var textAreaValue = inputExamples.value;
             var reg = /\n/gi;
             inputExamples.value = textAreaValue.replace(reg, ". ");
-            console.log(inputExamples.value);
         }
     }
     submitButton.addEventListener("click", submitButtonCallback);

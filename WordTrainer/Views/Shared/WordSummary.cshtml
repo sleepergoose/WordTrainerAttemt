@@ -1,0 +1,12 @@
+﻿@model WordTrainer.Models.Word
+
+<div class="container top-10">
+    <h4>@Model.Text</h4>
+    <h5><i>@Model.Translation</i></h5>
+    @{ 
+        foreach (var item in Model.Examples.Split(".").Select(ex => ex.Trim()).Where(p => p != ""))
+        {
+            <span class="">&#10004;@item</span><br />
+        }
+     }
+</div> 

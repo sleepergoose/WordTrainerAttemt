@@ -39,5 +39,12 @@ namespace WordTrainer.Controllers
         [HttpGet]
         public IActionResult Search() => View();
 
+
+        [HttpPost]
+        public bool Add(Word name)
+        {
+            repository.Add(name);
+            return true;
+        }
     }
 }

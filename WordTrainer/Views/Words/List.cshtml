@@ -1,32 +1,13 @@
 ﻿<!--Words/Index-->
 @model IEnumerable<WordTrainer.Models.Word>
 
-<div class="container top-15">
-            @{
-                int counter = 1;
-                foreach (var item in Model)
-                {
-                    <div class="container mb-3">
-                        <h3 class="h3">@(counter++). @item.Text</h3>
-                        <p class="font-italic text-justify">@item.Translation</p>
-                        <p name="title" class="font-italic d-none">Examples:</p>
-                        <div id="examplesBox" class="text-justify">
-                            @if (item.Examples.Count() > 0)
-                            {
-                                @foreach (var ex in item.Examples.Split(".").Where(p => p.Length > 5))
-                                {
-                                    @:<span>&#10004;</span> @ex.Trim()<br />
-                                }
-                            }
-                            else
-                            {
-                                <p><span>&#10004;</span>" @item.Examples</p>
-                            }
-                        </div>
-                        <hr />
-                    </div>
-                }
-            }
+<div class="container">
+      @{                 
+          foreach (var item in Model)
+          {
+              @await Html.PartialAsync("WordSummary", item);
+          }
+      }
 </div>
 
 <script>
