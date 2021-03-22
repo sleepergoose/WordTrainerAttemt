@@ -41,6 +41,16 @@ namespace WordTrainer
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Powered-By", "none");
+                context.Response.Headers.Add("X-Frame-Options", "DENY");
+                context.Response.Headers.Add("X-Xss-Protection", "1; mode=block");
+                // Content-Security-Policy
+                await next();
+            });
+
             app.UseStatusCodePages();    
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();

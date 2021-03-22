@@ -1,4 +1,15 @@
-﻿        var word = Word.parse(temp);
+﻿   
+   
+   
+    TODO:
+    1. тренер с русского на английский 
+    
+    
+    
+
+
+
+    var word = Word.parse(temp);
 
         console.log(word);
 

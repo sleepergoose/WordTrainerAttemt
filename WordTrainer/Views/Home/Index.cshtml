@@ -12,24 +12,31 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-4">
-            <h3>Trainer</h3>
-            <p>
-                Click 'Trainer' in the menu above to check how you know different English words
+        <div class="col-sm-3">
+            <h3>Trainer ENG</h3>
+            <p class="text-justify">
+                Click 'Trainer ENG' in the menu above to check how you know different English words
                 and phrases.
             </p>
-            <p><a asp-action="Train" asp-controller="Home" class="btn btn-secondary">Go ahead</a></p>
+            <p><a asp-action="TrainEn" asp-controller="Home" class="btn btn-secondary">Go ahead</a></p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
+            <h3>Trainer RUS</h3>
+            <p  class="text-justify">
+                Click 'Trainer RUS' in the menu above to check out your English vocabulary.
+            </p>
+            <p><a asp-action="TrainRu" asp-controller="Home" class="btn btn-secondary">Go ahead</a></p>
+        </div>
+        <div class="col-sm-3">
             <h3>Add Word</h3>
-            <p>
-                Click 'Add' in the menu above to add you own new English words and phrases. 
+            <p  class="text-justify">
+                Click 'Add' in the menu above to add you own new English words and phrases.
             </p>
             <p><a asp-action="AddWord" asp-controller="Words" class="btn btn-secondary">Go ahead</a></p>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <h3>Search</h3>
-            <p>
+            <p  class="text-justify">
                 Click 'Search' in the menu above to search a neccessary word into your vocabulary.
             </p>
             <p><a asp-action="Search" asp-controller="Words" class="btn btn-secondary">Go ahead</a></p>

@@ -23,7 +23,12 @@ namespace WordTrainer.Controllers
         public  IActionResult Index() => View(repository.Words);
 
         [HttpGet]
-        public IActionResult Train() => View(repository.Words.ToList());
+        public IActionResult TrainEn() => View(repository.Words.ToList());
+
+        [HttpGet]
+        public IActionResult TrainRu() => View(repository.Words.ToList());
+
+
 
         // Do not use in this time
         /// <summary>

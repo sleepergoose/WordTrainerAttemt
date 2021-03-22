@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
-    <meta charset="utf-8" />
     <title>Words Trainer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="~/Site.css"/>
@@ -27,17 +27,21 @@
                         </li>
                         <!--Item 2-->
                         <li class="nav-item">
-                            <a class="nav-link" asp-action="Train" asp-controller="Home">Trainer</a>
+                            <a class="nav-link" asp-action="TrainEn" asp-controller="Home">Trainer EN</a>
                         </li>
                         <!--Item 3-->
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("AddWord", "Words")">Add</a>
+                            <a class="nav-link" asp-action="TrainRu" asp-controller="Home">Trainer RU</a>
                         </li>
                         <!--Item 4-->
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("List", "Words")">List</a>
+                            <a class="nav-link" href="@Url.Action("AddWord", "Words")">Add</a>
                         </li>
                         <!--Item 5-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("List", "Words")">List</a>
+                        </li>
+                        <!--Item 6-->
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("Search", "Words")">Search</a>
                         </li>

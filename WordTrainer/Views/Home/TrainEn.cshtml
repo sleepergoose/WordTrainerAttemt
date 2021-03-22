@@ -14,27 +14,51 @@
         <div class="row">
             <div class="col-12 text-center ">
                 <h3 class="h3  text-secondary" id="word"
-                    style="font-size: 20pt; 
+                    style="font-size: 20pt;
                         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"></h3>
             </div>
         </div>
     </div>
-    
+
     <div class="form-group">
-        <input type="text" class="form-control text-center" 
+        <input type="text" class="form-control text-center"
                style="font-size: 20pt; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" name="trans" id="trans" />
     </div>
 
     <div class="form-group text-center">
         <button type="button" class="btn btn-default btn-lg mx-2" id="btnExample"
-                 data-toggle="tooltip" data-placement="left" title="Show examples"><span>&#8801</span></button>
+                data-toggle="tooltip" data-placement="left" title="Show examples">
+            <span>&#8801</span>
+        </button>
         <button type="submit" class="btn btn-info btn-lg mx-2" id="btnCheck">Check</button>
         <button type="button" class="btn btn-default btn-lg mx-2" id="btnTranslate"
-                data-toggle="tooltip" data-placement="right" title="Show translation"><span>&#8801</span></button>
+                data-toggle="tooltip" data-placement="right" title="Show translation">
+            <span>&#8801</span>
+        </button>
+    </div>
+    <div class="container text-center">
+        <button class="btn btn-default" id="btnStartOver"
+                data-toggle="tooltip" data-placement="left" title="Let's start again!">
+            Start Over
+        </button>
     </div>
     <br />
     <div id="toolTip" class="form-group">
+        <!--This is a place for translation and examples-->
+    </div>
 
+    <div id="wrongWordsTable" class="form-group invisible" disabled="disabled">
+        <!--This is a place for wrong words table-->
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Wrong&rarr;Rigth</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
     </div>
 
 </div>
@@ -61,6 +85,12 @@
     var btnTranslate = document.getElementById("btnTranslate");
     var scores = document.getElementById("scores");
     var toolTip = document.getElementById("toolTip");
+    var btnStartOver = document.getElementById("btnStartOver");
+    var tableBody = document.getElementById("tableBody");
+    var wrongWordsTable = document.getElementById("wrongWordsTable");
+    // Storage for wrong answers
+    var wrongAnswer = new Map();
+
 
     // Adds EventListener for 'Enter' key press
     trans.addEventListener("keyup", function (e) {
@@ -84,18 +114,35 @@
     // Create Set of unique values
     var uniqueSet = new Set();
     var crowlerArray = [];
-    while (uniqueSet.size < ammount) {
-        var num = Math.floor(Math.random() * ammount);
-        uniqueSet.add(num);
+    function createUniqueSet() {
+        uniqueSet = new Set();
+        crowlerArray = [];
+        while (uniqueSet.size < ammount) {
+            var num = Math.floor(Math.random() * ammount);
+            uniqueSet.add(num);
+        }
+        uniqueSet.forEach(p => crowlerArray.push(p));
     }
-    uniqueSet.forEach(p => crowlerArray.push(p));
-
-    scores.attributes["aria-valuemax"].value = 100;
+    createUniqueSet();
 
     // actions
     var counter = 0;
     var points = 0;
-    
+    // Start train again
+    btnStartOver.addEventListener("click", function (event) {
+        createUniqueSet();
+        counter = 0;
+        points = 0;
+        scores.style.width = 0 + '%';
+        scores.attributes["aria-valuenow"].value = 0;
+        scores.innerText = "";
+        transBox.removeAttribute("disabled", "true");
+        wrongWordsTable.className = "form-group invisible";
+        wrongAnswer.clear();
+        load();
+    });
+
+
     // Loads new word in trainer
     // Crearing form's input 'transBox'
     function load() {
@@ -108,10 +155,19 @@
             transBox.focus();
         }
         else {
-            wordBox.innerText = `Work's done! ${points} words are right / ${ammount - points} words are wrong`;
+            wordBox.innerText = `It's done! \r right: ${points}, wrong: ${ammount - points}`;
             transBox.value = "";
             toolTip.innerHTML = "";
             transBox.setAttribute("disabled", "true");
+
+            if (wrongAnswer.size !== 0) {
+                var html = "";
+                for (var item of wrongAnswer) {
+                    html += "<tr><td>" + item[0] + "</td><td>" + item[1] + "</td></tr>";
+                }
+                tableBody.innerHTML = html;
+                wrongWordsTable.className = "form-group visible";
+            }
         }
     }
     load();
@@ -122,7 +178,7 @@
     // Main 'btn' function
     function btnCallback(e) {
         // Gets value from 'transBox'
-        var trans = transBox.value.toLowerCase().trim();
+        var trans = transBox.value.toLowerCase().trim().replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "");
         // if trans is empty - interrupt event executing
         if (trans === "") {
             e.preventDefault();
@@ -142,6 +198,7 @@
             }
             // If translation is not right
             else {
+                wrongAnswer.set(wordBox.innerText, trans + `&rarr;<b>${arr[counter].translation.toLowerCase()}</b>`);
                 load();
             }
         }

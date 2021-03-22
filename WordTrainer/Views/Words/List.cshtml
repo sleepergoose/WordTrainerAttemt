@@ -29,3 +29,9 @@
             }
 </div>
 
+<script>
+    // Set date from Model to localStorage
+    localStorage.clear();
+    var model = '@Json.Serialize(@Model)';
+    localStorage.setItem("model", model);
+</script>
