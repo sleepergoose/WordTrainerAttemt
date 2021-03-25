@@ -10,6 +10,7 @@ namespace WordTrainer.Models
         public int WordID { get; set; }
         [Required]
         public string Text { get; set; }
+        public string Transcription { get; set; }
         public string Translation { get; set; }
         public string Examples { get; set; }
         public bool? Favourite { get; set; } = false;

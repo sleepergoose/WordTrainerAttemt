@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -16,17 +17,36 @@ namespace WordTrainer.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Local repository variable
+        /// </summary>
         private IWordRepository repository;
 
+        // Constructor 
         public HomeController(IWordRepository repo) => repository = repo;
-        
-        public  IActionResult Index() => View(repository.Words);
 
+        /// <summary>
+        /// Main (Home) page
+        /// </summary>
+        public IActionResult Index() => View(repository.Words);
+
+        /// <summary>
+        /// Trainer from English to Russian
+        /// </summary>
         [HttpGet]
         public IActionResult TrainEn() => View(repository.Words.ToList());
 
+        /// <summary>
+        /// Trainer from English to Russian
+        /// </summary>
         [HttpGet]
         public IActionResult TrainRu() => View(repository.Words.ToList());
+
+        public VirtualFileResult Train3000En()
+        {
+            var filepath = Path.Combine("~/Content", "oxford_3000.json");
+            return File(filepath, "text/plain", "hello.txt");
+        }
 
 
 

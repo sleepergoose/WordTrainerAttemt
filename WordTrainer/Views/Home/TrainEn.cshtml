@@ -67,13 +67,32 @@
 
 </div>
 
+
+
+<button class="btn btn-primary" onclick="myfunction()">Load</button>
 <script>
+    @*var res;
+    async function myfunction() {
+        var res = await fetch('@Url.Action("Train3000En", "Home")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(function (response) {
+                return response.json();
+            });
+            
+        
+        console.log(res[0]['text']);
+    }*@
+
     // Set date from Model to localStorage
     localStorage.clear();
     var model = '@Json.Serialize(@Model)';
     localStorage.setItem("model", model);
 </script>
-    
+
 <script type="module">
 
     import { Word } from '/script.js';
@@ -108,7 +127,7 @@
         arr.push(Word.parse(i));
     }
 
-    // Words ammount 
+    // Words ammount
     var ammount = arr.length;
 
     // Create Set of unique values
@@ -185,14 +204,14 @@
         }
         else {
             // If translation is right
-            if (arr[counter].translation.toLowerCase().split(",").includes(trans) || arr[counter].translation.toLowerCase().split(",").includes(" " + trans)) { 
+            if (arr[counter].translation.toLowerCase().split(",").includes(trans) || arr[counter].translation.toLowerCase().split(",").includes(" " + trans)) {
                 // Progress Bar section
                 points += 1;
                 var tempScores = points * 100 / ammount;
                 scores.innerText = tempScores.toFixed(1) + '%';
                 scores.style.width = tempScores + '%';
                 scores.attributes["aria-valuenow"].value = tempScores;
- 
+
                 load();
                 transBox.value = "";
             }
