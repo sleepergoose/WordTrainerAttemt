@@ -1,12 +1,11 @@
 ﻿@model WordTrainer.Models.Word
 
-
-
+<!--Main Page Content-->
 <div class="container top-15">
 
     <h3 class="h3 text-center">Add new word right here</h3>
 
-    <form  id="addForm" method="post">
+    <form id="addForm" method="post">
         <div class="form-group">
             <label asp-for="Text">Word</label>
             <input class="form-control" type="text" name="Text" asp-for="Text" />
@@ -18,30 +17,31 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Examples">Examples</label>
-            <textarea name="Examples" cols="50" class="form-control" rows="4" asp-for="Examples"></textarea>
+            <label asp-for="ExamplesEn">ExamplesEn</label>
+            <textarea name="ExamplesEn" cols="50" class="form-control" rows="4" asp-for="ExamplesEn"></textarea>
         </div>
 
         <div class="form-group">
-            <input  id="submitButton" data-toggle="modal" data-target="#exampleModalLive" class="btn btn-info btn-lg" value="Add" />
+            <input id="submitButton" data-toggle="modal" data-target="#exampleModalLive" class="btn btn-info btn-lg" value="Add" />
         </div>
     </form>
 
 
 </div>
 
+<!--Modal Window Content-->
 <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel">Submit Form</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p id="modalTranslation">Woohoo, you're reading this text in a modal!</p>
-                <p id="modalExamples">Woohoo, you're reading this text in a modal!</p>
+                <p id="modalTranslation">Translation</p>
+                <p id="modalExamples">Examples</p>
             </div>
 
             <div class="modal-footer">
@@ -57,56 +57,55 @@
 
 
 <script>
+    // Get form element
     var text = document.getElementsByName("Text")[0];
-    var examples = document.getElementsByName("Examples")[0];
+    var examples = document.getElementsByName("ExamplesEn")[0];
     var translation = document.getElementsByName("Translation")[0];
 
 
-    
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $('#submitButton').click(function () {
-                var exampleModalLiveLabel = document.getElementById("exampleModalLiveLabel");
-                var modalTranslation = document.getElementById("modalTranslation");
-                var modalExamples = document.getElementById("modalExamples");
+        // Shows Modal Window
+        $('#submitButton').click(function () {
+            var exampleModalLiveLabel = document.getElementById("exampleModalLiveLabel");
+            var modalTranslation = document.getElementById("modalTranslation");
+            var modalExamples = document.getElementById("modalExamples");
 
-                exampleModalLiveLabel.innerText = text.value;
-                modalTranslation.innerText = translation.value;
-                modalExamples.innerText = examples.value;
-            });
-
-
-
-            $('#btnModalAdmit').click(function () {
-              $.ajax({
-
-                url: "@Url.Action("Add", "Words")",
-                type: "POST",
-                data: $('#addForm').serialize(),
-                dataType: "html",
-                success: function (data) {
-                    result = $.parseJSON(data);
-                    console.log(result);  
-                    text.value = "";
-                    examples.value = "";
-                    translation.value = "";
-                },
-                failure: function () {
-                    console.log("error");
-                }
-            });
-            });
+            exampleModalLiveLabel.innerText = text.value;
+            modalTranslation.innerText = translation.value;
+            modalExamples.innerText = examples.value;
         });
 
+        // Saves the new word
+        $('#btnModalAdmit').click(function () {
+          $.ajax({
 
+            url: "@Url.Action("AddWord", "Words")",
+            type: "POST",
+            data: $('#addForm').serialize(),
+            dataType: "html",
+            success: function (data) {
+                result = $.parseJSON(data);
+                console.log(result);
+                text.value = "";
+                examples.value = "";
+                translation.value = "";
+            },
+            failure: function () {
+                console.log("error");
+            }
+        });
+        });
+    });
 </script>
 
 
 <script>
+    // Gets form elements and button
     var submitButton = document.getElementById("submitButton");
     var inputText = document.getElementsByName("Text")[0];
     var inputTranslation = document.getElementsByName("Translation")[0];
-    var inputExamples = document.getElementsByName("Examples")[0];
+    var inputExamples = document.getElementsByName("ExamplesEn")[0];
 
     // Adding events listeners
     function submitButtonAutoPress(event) {
@@ -116,18 +115,11 @@
     }
     inputExamples.addEventListener("keyup", submitButtonAutoPress);
 
-
     // Checking
     function submitButtonCallback(event) {
         if (inputText.value == "" || inputTranslation.value == "" || inputExamples.value == "") {
             event.preventDefault();
         }
-        else {
-            var textAreaValue = inputExamples.value;
-            var reg = /\n/gi;
-            inputExamples.value = textAreaValue.replace(reg, ". ");
-        }
     }
     submitButton.addEventListener("click", submitButtonCallback);
-
 </script>

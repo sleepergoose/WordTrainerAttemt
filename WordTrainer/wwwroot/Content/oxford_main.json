@@ -347,29 +347,393 @@
       "Я принимаю ваше любезное предложение."
     ]
   },
+  {
+    "text": "acceptable",
+    "transcription": "əkˈseptəbl",
+    "translation": [
+      "приемлемый",
+      "допустимый",
+      "подходящий",
+      "угодный",
+      "желанный",
+      "приятный"
+    ],
+    "examplesEN": [
+      "The offer is not acceptable to both parties",
+      "The water was acceptable for drinking"
+    ],
+    "examplesRU": [
+      "Это предложение неприемлемо для обеих сторон",
+      "Вода была пригодной / годилась для питья"
+    ]
+  },
+  {
+    "text": "access",
+    "transcription": "ˈækses",
+    "translation": [
+      "доступ",
+      "проход",
+      "подход",
+      "выборка",
+      "припадок",
+      "обращаться",
+      "иметь",
+      "доступ"
+    ],
+    "examplesEN": [
+      "Do you have access to the Internet?",
+      "You'll need a password to access the database.",
+      "He always has access to the Prime Minister."
+    ],
+    "examplesRU": [
+      "У вас есть доступ в интернет?",
+      "Для доступа к базе данных вам понадобится пароль.",
+      "У него всегда есть доступ к премьер-министру."
+    ]
+  },
+  {
+    "text": "accident",
+    "transcription": "ˈæksɪdənt",
+    "translation": [
+      "авария",
+      "случайность",
+      "несчастный",
+      "случай",
+      "катастрофа",
+      "случай"
+    ],
+    "examplesEN": [
+      "We discovered it by accident.",
+      "He was in a bad accident."
+    ],
+    "examplesRU": [
+      "Мы обнаружили это случайно.",
+      "Он попал в серьёзную аварию."
+    ]
+  },
+  {
+    "text": "accidental",
+    "transcription": "ˌæksɪˈdentl",
+    "translation": [
+      "случайный",
+      "неожиданный",
+      "второстепенный",
+      "случайность",
+      "случайный",
+      "элемент"
+    ],
+    "examplesEN": [
+      "Our meeting was purely accidental.",
+      "I accidentally locked myself out of the house."
+    ],
+    "examplesRU": [
+      "Наша встреча произошла совершенно случайно.",
+      "Я случайно запер дверь, и не могу попасть домой."
+    ]
+  },
+  {
+    "text": "accidentally",
+    "transcription": "ˌæksɪˈdentəlɪ",
+    "translation": [
+      "случайно",
+      "нечаянно",
+      "непредумышленно"
+    ],
+    "examplesEN": [
+      "I accidentally cut my thumb.",
+      "He accidentally broke a window."
+    ],
+    "examplesRU": [
+      "Я случайно порезал большой палец.",
+      "Он случайно разбил окно."
+    ]
+  },
+  {
+    "text": "accommodation",
+    "transcription": "əˌkɑːməˈdeɪʃn",
+    "translation": [
+      "жилье",
+      "помещение",
+      "приспособление",
+      "аккомодация",
+      "компромисс",
+      "приют",
+      "примирение"
+    ],
+    "examplesEN": [
+      "The price for the holiday includes flights and accommodation.",
+      "They had begun to seek a possible accommodation.",
+      "We reached an accommodation between both parties"
+    ],
+    "examplesRU": [
+      "В стоимость отдыха входит перелет и проживание.",
+      "Они начали искать возможный компромисс.",
+      "Мы достигли компромисса между обеими сторонами."
+    ]
+  },
+  {
+    "text": "accompany",
+    "transcription": "əˈkʌmpənɪ",
+    "translation": [
+      "сопровождать",
+      "сопутствовать",
+      "аккомпанировать"
+    ],
+    "examplesEN": [
+      "She will accompany me to the store",
+      "He agreed to accompany me on a trip to Africa."
+    ],
+    "examplesRU": [
+      "Она сходит со мной в магазин.",
+      "Он согласился сопровождать меня в путешествии в Африку."
+    ]
+  },
+  {
+    "text": "according to",
+    "transcription": "",
+    "translation": [
+      "в соответствии с",
+      "согласно с"
+    ],
+    "examplesEN": [
+      "Charges vary according to size",
+      "We will proceed according to plan"
+    ],
+    "examplesRU": [
+      "Расценки варьируются в зависимости от размера",
+      "Мы будем действовать в соответствии с планом"
+    ]
+  },
+  {
+    "text": "account",
+    "transcription": "əˈkaʊnt",
+    "translation": [
+      "счет",
+      "расчет",
+      "отчет",
+      "приходиться",
+      "отчитываться",
+      "бухгалтерский"
+    ],
+    "examplesEN": [
+      "I account myself happy.",
+      "This accounts for his behaviour.",
+      "He will account for his crime.",
+      "I account myself happy."
+    ],
+    "examplesRU": [
+      "Я считаю себя счастливым.",
+      "Так вот чем объясняется его поведение.",
+      "Он ответит за своё преступление.",
+      "Я считаю себя счастливым."
+    ]
+  },
+  {
+    "text": "account for",
+    "transcription": "",
+    "translation": [
+      "счет для",
+      "отвечать за",
+      "нести ответственность за",
+      "объясняться за"
+    ],
+    "examplesEN": [
+      "He will account for his crime.",
+      "How do you account for the accident?"
+    ],
+    "examplesRU": [
+      "Он ответит за своё преступление.",
+      "Как вы объясните причины этого несчастного случая?  "
+    ]
+  },
+  {
+    "text": "accurate",
+    "transcription": "ˈækjərət",
+    "translation": [
+      "точный",
+      "тщательный",
+      "меткий",
+      "калиброванный",
+      "правильный"
+    ],
+    "examplesEN": [
+      "They were accurate in their prediction.",
+      "Her novel is historically accurate.",
+      "A child's recall is usually accurate."
+    ],
+    "examplesRU": [
+      "Они оказались точны в своих прогнозах.",
+      "Её роман исторически точен. / В её романе точно отражаются исторические события.",
+      "Детские воспоминания, как правило, точны."
+    ]
+  },
+  {
+    "text": "accurately",
+    "transcription": "ˈækjərətlɪ",
+    "translation": [
+      "точно",
+      "правильно",
+      "тщательно",
+      "безошибочно"
+    ],
+    "examplesEN": [
+      "Does this gun shoot accurately?",
+      "You didn't measure the angle accurately."
+    ],
+    "examplesRU": [
+      "Это оружие хорошо пристреляно? / Этот пистолет метко стреляет?",
+      "Вы неправильно измерили этот угол. "
+    ]
+  },
+  {
+    "text": "accuse",
+    "transcription": "əˈkjuːz",
+    "translation": [
+      "обвинять",
+      "винить",
+      "предъявлять",
+      "обвинение"
+
+    ],
+    "examplesEN": [
+      "He was accused of murder",
+      "How dare you accuse me of lying!",
+      "Smith accused her of lying"
+    ],
+    "examplesRU": [
+      "Его обвинили в убийстве.",
+      "Как вы смеете обвинять меня во лжи!",
+      "Смит обвинил ее во лжи."
+    ]
+  },
+  {
+    "text": "achieve",
+    "transcription": "əˈtʃiːv",
+    "translation": [
+      "достигать",
+      "добиваться",
+      "выполнять",
+      "успешно",
+      "выполнять",
+      "доводить до конца"
+    ],
+    "examplesEN": [
+      "His plan was achieved.",
+      "His words achieved their object.",
+      "She was unable to achieve her aims."
+    ],
+    "examplesRU": [
+      "Его план был успешно выполнен. ",
+      "Его слова достигли своей цели",
+      "Она была не в состоянии достичь своих целей."
+    ]
+  },
+  {
+    "text": "achievement",
+    "transcription": "əˈtʃiːvmənt",
+    "translation": [
+      "достижение",
+      "успех",
+      "выполнение",
+      "подвиг"
+    ],
+    "examplesEN": [
+      "It was a great achievement.",
+      "The bridge was an epic achievement."
+    ],
+    "examplesRU": [
+      "Это была огромная победа.",
+      "Этот мост был грандиозным достижением"
+    ]
+  },
+  {
+    "text": "acid",
+    "transcription": "ˈæsɪd",
+    "translation": [
+      "кислота",
+      "ЛСД",
+      "язвительность",
+      "ехидство",
+      "кислотный",
+      "кислый",
+      "едкий",
+      "язвительный"
+    ],
+    "examplesEN": [
+      "Acid attacks metals.",
+      "I burned my skin with the acid."
+    ],
+    "examplesRU": [
+      "Кислота разъедает металлы",
+      "Я обжёгся кислотой."
+    ]
+  },
+  {
+    "text": "acknowledge",
+    "transcription": "əkˈnɑːlɪdʒ",
+    "translation": [
+      "признавать",
+      "подтверждать",
+      "сознавать",
+      "допускать",
+      "награждать",
+      "быть признательным"
+    ],
+    "examplesEN": [
+      "They readily acknowledged their mistake",
+      "The film festival is acknowledged as an event of international importance."
+    ],
+    "examplesRU": [
+      "Они сразу признали свою ошибку.",
+      "Кинофестиваль признан событием международного масштаба."
+    ]
+  },
+  {
+    "text": "couple",
+    "transcription": "ˈkʌpl",
+    "translation": [
+      "пара",
+      "два",
+      "чета",
+      "пара",
+      "сил",
+      "элемент",
+      "свора",
+      "соединять",
+      "соединяться",
+      "связывать"
+    ],
+    "examplesEN": [
+      "Are they a couple? No, they are just good friends.",
+      "The young couple were holding hands"
+    ],
+    "examplesRU": [
+      "Они пара? Нет, они просто хорошие друзья.",
+      "Молодая пара держалась за руки."
+    ]
+  },
+  {
+    "text": "acquire",
+    "transcription": "əˈkwaɪər",
+    "translation": [
+      "приобретать",
+      "получать",
+      "овладевать",
+      "обзаводиться",
+      "наживать",
+      "достигать",
+      "заводить"
+    ],
+    "examplesEN": [
+      "They acquired a new pet.",
+      "The old word has acquired a new meaning."
+    ],
+    "examplesRU": [
+      "Они завели нового питомца.",
+      "Старое слово приобрело новый смысл."
+    ]
+  },
   "",
-  "",
-  "",
-  "",
-  "acceptable",
-  "access",
-  "accident",
-  "accidental",
-  "accidentally",
-  "accommodation",
-  "accompany",
-  "according to",
-  "account",
-  "account for",
-  "accurate",
-  "accurately",
-  "accuse",
-  "achieve",
-  "achievement",
-  "acid",
-  "acknowledge",
-  "a couple",
-  "acquire",
   "across",
   "act",
   "action",

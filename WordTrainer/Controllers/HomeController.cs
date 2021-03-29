@@ -42,6 +42,7 @@ namespace WordTrainer.Controllers
         [HttpGet]
         public IActionResult TrainRu() => View(repository.Words.ToList());
 
+        [Route("api/Home/[action]")]
         public VirtualFileResult Train3000En()
         {
             var filepath = Path.Combine("~/Content", "oxford_3000.json");

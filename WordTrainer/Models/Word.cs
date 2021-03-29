@@ -11,11 +11,13 @@ namespace WordTrainer.Models
         [Required]
         public string Text { get; set; }
         public string Transcription { get; set; }
+        [Required]
         public string Translation { get; set; }
-        public string Examples { get; set; }
+        public string ExamplesEn { get; set; }
+        public string ExamplesRu { get; set; }
         public bool? Favourite { get; set; } = false;
         public bool? IsForgoten { get; set; } = false;
-        public Rank? Rank { get; set; }
+        public int? Rank { get; set; }
     }
 
     public enum Rank
