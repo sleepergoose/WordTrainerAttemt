@@ -1,7 +1,7 @@
 
 
  class Word {
-     constructor(wordID, text, rank, translation, transcription, isForgoten, favourite, examples) {
+     constructor(wordID, text, rank, translation, transcription, isForgoten, favourite, examplesEn, examplesRu) {
         this.wordID = wordID;
         this.text = text;
         this.rank = rank;
@@ -9,7 +9,8 @@
         this.transcription = transcription;
         this.isForgoten = isForgoten;
         this.favourite = favourite;
-        this.examples = examples;
+         this.examplesEn = examples;
+         this.examplesRu = examples;
     }
 
     parse(wordObject) {
@@ -20,7 +21,8 @@
         this.transcription = wordObject['transcription'];
         this.isForgoten = wordObject['isForgoten'];
         this.favourite = wordObject['favourite'];
-        this.examples = wordObject['examples'];
+        this.examplesEn = wordObject['examplesEn'];
+        this.examplesRu = wordObject['examplesRu'];
     }
 
     static parse(wordObject) {
@@ -32,7 +34,8 @@
         temp.translation = wordObject['translation'];
         temp.isForgoten = wordObject['isForgoten'];
         temp.favourite = wordObject['favourite'];
-        temp.examples = wordObject['examples'];
+        temp.examplesEn = wordObject['examplesEn'];
+        temp.examplesRu = wordObject['examplesRu'];
         return temp;
     }
 }

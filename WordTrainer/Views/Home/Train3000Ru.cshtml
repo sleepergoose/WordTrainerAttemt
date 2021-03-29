@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WordTrainer.Models.Word>
 
-<!--Page Main Contant-->
+
 <div class="container top-15">
 
     <div class="py-2 pb-4">
@@ -43,6 +43,7 @@
         </button>
     </div>
     <br />
+
     <div id="toolTip" class="form-group">
         <!--This is a place for translation and examples-->
     </div>
@@ -57,16 +58,11 @@
                 </tr>
             </thead>
             <tbody id="tableBody">
+                
             </tbody>
         </table>
     </div>
-
 </div>
-
-<div id="output">
-
-</div>
-
 
 
 <script>
@@ -75,12 +71,11 @@
     var model = '@Json.Serialize(@Model)';
     localStorage.setItem("model", model);
 </script>
-
+    
 <script type="module">
 
-    import { Word } from '/js/script.js';
+    import { Word } from '/script.js';
 
-    // Gets html elements
     var wordBox = document.getElementById("word");
     var transBox = document.getElementById("trans");
     var btnExample = document.getElementById("btnExample");
@@ -91,7 +86,6 @@
     var btnStartOver = document.getElementById("btnStartOver");
     var tableBody = document.getElementById("tableBody");
     var wrongWordsTable = document.getElementById("wrongWordsTable");
-
     // Storage for wrong answers
     var wrongAnswer = new Map();
 
@@ -111,9 +105,9 @@
         arr.push(Word.parse(i));
     }
 
-    // Words ammount
+    // Words ammount 
     var ammount = arr.length;
-
+    
     // Create Set of unique values
     var uniqueSet = new Set();
     var crowlerArray = [];
@@ -128,7 +122,7 @@
     }
     createUniqueSet();
 
-    // actions
+    // actions 
     var counter = 0;
     var points = 0;
     // Start train again
@@ -146,13 +140,14 @@
     });
 
 
+    
     // Loads new word in trainer
     // Crearing form's input 'transBox'
     function load() {
         counter = crowlerArray.pop();
         if (counter != undefined) {
-            var question = arr[counter];
-            wordBox.innerText = question.text;
+            var question = arr[counter].translation.split(",");
+            wordBox.innerText = question[Math.floor(Math.random() * question.length)];
             transBox.value = "";
             toolTip.innerHTML = "";
             transBox.focus();
@@ -188,20 +183,19 @@
         }
         else {
             // If translation is right
-            if (arr[counter].translation.toLowerCase().split(",").includes(trans) || arr[counter].translation.toLowerCase().split(",").includes(" " + trans)) {
+            if (arr[counter].text.toLowerCase() === trans || arr[counter].text.toLowerCase() === " " + trans) { 
                 // Progress Bar section
                 points += 1;
                 var tempScores = points * 100 / ammount;
                 scores.innerText = tempScores.toFixed(1) + '%';
                 scores.style.width = tempScores + '%';
                 scores.attributes["aria-valuenow"].value = tempScores;
-
                 load();
                 transBox.value = "";
             }
             // If translation is not right
             else {
-                wrongAnswer.set(wordBox.innerText, trans + `&rarr;<b>${arr[counter].translation.toLowerCase()}</b>`);
+                wrongAnswer.set(wordBox.innerText, trans + `&rarr;<b>${arr[counter].text.toLowerCase()}</b>`);
                 load();
             }
         }
@@ -216,10 +210,6 @@
     // Adds EventListener for 'btnExample'
     btnExample.addEventListener("click", function (event) {
         toolTip.innerHTML = "";
-        var temp = arr[counter].examples.split("*").filter(p => p !== " ");
-        for (var i = 0; i < temp.length; i += 2) {
-            let str = temp[i].trim() + " - " + temp[i + 1].trim();
-            toolTip.innerHTML += `<p><span>&#10004;</span> ${str.trim() === "" ? "There are not more examples" : str.trim()}</p>`;
-        }
+        arr[counter].examples.split(".").filter(p => p !== " ").forEach(p => toolTip.innerHTML += `<p><span>&#10004;</span> ${p.trim() === "" ? "There are not more examples" : p.trim()}</p>`);
     });
 </script>
