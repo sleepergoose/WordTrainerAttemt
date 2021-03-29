@@ -210,6 +210,9 @@
     // Adds EventListener for 'btnExample'
     btnExample.addEventListener("click", function (event) {
         toolTip.innerHTML = "";
-        arr[counter].examples.split(".").filter(p => p !== " ").forEach(p => toolTip.innerHTML += `<p><span>&#10004;</span> ${p.trim() === "" ? "There are not more examples" : p.trim()}</p>`);
-    });
+        var temp = arr[counter].examples.split("*").filter(p => p !== " ");
+        for (var i = 0; i < temp.length; i += 2) {
+            let str = temp[i].trim() + " - " + temp[i + 1].trim();
+            toolTip.innerHTML += `<p><span>&#10004;</span> ${str.trim() === "" ? "There are not more examples" : str.trim()}</p>`;
+        }    });
 </script>

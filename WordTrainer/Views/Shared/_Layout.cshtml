@@ -26,16 +26,15 @@
                             <a class="nav-link" aria-current="page" asp-action="Index" asp-controller="Home">Home</a>
                         </li>
                         <!--Item 2-->
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="TrainEn" asp-controller="Home">Trainer EN</a>
-                        </li>
-                        <!--Item 3-->
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="TrainRu" asp-controller="Home">Trainer RU</a>
-                        </li>
-                        <!--Item 4-->
-                        <li class="nav-item">
-                            <a class="nav-link" asp-action="Train3000En" asp-controller="Home">Trainer 3000 RU</a>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trainer</a>
+                            <div class="dropdown-menu  bg-dark" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item nav-link pl-3" asp-action="TrainEn" asp-controller="Home">Trainer EN</a>
+                                <a class="dropdown-item nav-link pl-3" asp-action="TrainRu" asp-controller="Home">Trainer RU</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item nav-link pl-3" asp-action="Train3000En" asp-controller="Home">Trainer 3000 EN</a>
+                                <a class="dropdown-item nav-link pl-3" asp-action="Train3000Ru" asp-controller="Home">Trainer 3000 RU</a>
+                            </div>
                         </li>
                         <!--Item 5-->
                         <li class="nav-item">

@@ -6,11 +6,12 @@
         </div>
 </div>
 
+
 <div id="word-presenter" class="container mt-5 px-5">
-    <h3 id="wordBox" class="h3"></h3>
+    <h3 id="wordBox"></h3>
+    <span id="transcriptionBox"> </span>
     <hr />
     <p id="translationBox" class="font-italic text-justify"></p>
-    <br />
     <p name="title" class="font-italic d-none">Examples:</p>
     <div id="examplesBox" class="text-justify"></div>
 </div>
@@ -37,7 +38,7 @@
     var translationBox = document.getElementById("translationBox");
     var examplesBox = document.getElementById("examplesBox");
     var wordPresenter = document.getElementById("word-presenter");
-
+    var transcriptionBox = document.getElementById("transcriptionBox");
     // Set focus on searchBox
     searchBox.focus();
 
@@ -58,20 +59,24 @@
         else {
             // If translation is right
             var word = "";
-            if (dict.has(searchBox.value.toLowerCase()) == true) {
-                word = dict.get(searchBox.value);
+            var searchWord = searchBox.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "").trim().toLowerCase();
+            if (dict.has(searchWord) == true) {
+                word = dict.get(searchWord);
                 var titleBox = document.getElementsByName("title");
                 for (var item of titleBox) {
                     item.className = "font-italic d-block";
                 }
                 wordBox.innerHTML = word.text;
-                translationBox.innerHTML = word.translation;
+                translationBox.innerHTML = "<span>&#10004;</span>" + word.translation;
+
+                transcriptionBox.innerHTML = ` [${word.transcription}]`;
 
                 examplesBox.innerHTML = (function () {
                     var res = "";
-                    var trans = word.examples.split(".").filter(p => p.length > 1);
-                    for (var item of trans) {
-                        res += "<span>&#10004;</span>" + item.trim() + "<br/><br/>";
+                    var examples = word.examples.split("*").filter(p => p.length > 1);
+                    for (var i = 0; i < examples.length; i += 2) {
+                        let str = examples[i].trim() + " - " + examples[i + 1].trim();
+                        res += `<p><span>&#10004;</span> ${str.trim() === "" ? "There are not more examples" : str.trim()}</p>`;
                     }
                     return res;
                 })();
@@ -87,11 +92,6 @@
             }
         }
     } 
-
-
-    
-          
-
 </script>
 
 

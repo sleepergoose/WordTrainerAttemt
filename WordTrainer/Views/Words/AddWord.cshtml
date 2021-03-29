@@ -1,15 +1,19 @@
 ﻿@model WordTrainer.Models.Word
 
-
-
+<!--Main Page Content-->
 <div class="container top-15">
 
     <h3 class="h3 text-center">Add new word right here</h3>
 
-    <form  id="addForm" method="post">
+    <form id="addForm" method="post">
         <div class="form-group">
             <label asp-for="Text">Word</label>
             <input class="form-control" type="text" name="Text" asp-for="Text" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Transcription">Transcription</label>
+            <input class="form-control" type="text" name="Transcription" asp-for="Transcription" />
         </div>
 
         <div class="form-group">
@@ -23,25 +27,25 @@
         </div>
 
         <div class="form-group">
-            <input  id="submitButton" data-toggle="modal" data-target="#exampleModalLive" class="btn btn-info btn-lg" value="Add" />
+            <input id="submitButton" data-toggle="modal" data-target="#exampleModalLive" class="btn btn-info btn-lg" value="Add" />
         </div>
     </form>
-
-
 </div>
 
+<!--Modal Window Content-->
 <div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel" style="display: none;" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLiveLabel">Submit Modal</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p id="modalTranslation">Woohoo, you're reading this text in a modal!</p>
-                <p id="modalExamples">Woohoo, you're reading this text in a modal!</p>
+                <p id="modalTranslation">Translation</p>
+                <p id="modalTranscription">Transcription</p>
+                <p id="modalExamples">Examples</p>
             </div>
 
             <div class="modal-footer">
@@ -60,45 +64,43 @@
     var text = document.getElementsByName("Text")[0];
     var examples = document.getElementsByName("Examples")[0];
     var translation = document.getElementsByName("Translation")[0];
+    var transcription = document.getElementsByName("Transcription")[0];
 
+    $(document).ready(function () {
 
-    
-        $(document).ready(function () {
+        $('#submitButton').click(function () {
+            var exampleModalLiveLabel = document.getElementById("exampleModalLiveLabel");
+            var modalTranslation = document.getElementById("modalTranslation");
+            var modalExamples = document.getElementById("modalExamples");
+            var modalTranscription = document.getElementById("modalTranscription");
 
-            $('#submitButton').click(function () {
-                var exampleModalLiveLabel = document.getElementById("exampleModalLiveLabel");
-                var modalTranslation = document.getElementById("modalTranslation");
-                var modalExamples = document.getElementById("modalExamples");
-
-                exampleModalLiveLabel.innerText = text.value;
-                modalTranslation.innerText = translation.value;
-                modalExamples.innerText = examples.value;
-            });
-
-
-
-            $('#btnModalAdmit').click(function () {
-              $.ajax({
-
-                url: "@Url.Action("Add", "Words")",
-                type: "POST",
-                data: $('#addForm').serialize(),
-                dataType: "html",
-                success: function (data) {
-                    result = $.parseJSON(data);
-                    console.log(result);  
-                    text.value = "";
-                    examples.value = "";
-                    translation.value = "";
-                },
-                failure: function () {
-                    console.log("error");
-                }
-            });
-            });
+            exampleModalLiveLabel.innerText = text.value;
+            modalTranslation.innerText = translation.value;
+            modalExamples.innerText = examples.value;
+            modalTranscription.innerText = transcription.value;
         });
 
+        $('#btnModalAdmit').click(function () {
+          $.ajax({
 
+            url: "@Url.Action("Add", "Words")",
+            type: "POST",
+              data: $('#addForm').serialize(),
+            dataType: "html",
+            success: function (data) {
+                result = $.parseJSON(data);
+                //console.log(result);
+                text.value = "";
+                examples.value = "";
+                translation.value = "";
+                transcription.value = "";
+            },
+            failure: function () {
+                console.log("error");
+            }
+        });
+        });
+    });
 </script>
 
 
@@ -107,6 +109,7 @@
     var inputText = document.getElementsByName("Text")[0];
     var inputTranslation = document.getElementsByName("Translation")[0];
     var inputExamples = document.getElementsByName("Examples")[0];
+    var inputTranscription = document.getElementsByName("Transcription")[0];
 
     // Adding events listeners
     function submitButtonAutoPress(event) {
@@ -123,11 +126,13 @@
             event.preventDefault();
         }
         else {
-            var textAreaValue = inputExamples.value;
-            var reg = /\n/gi;
-            inputExamples.value = textAreaValue.replace(reg, ". ");
+            inputText.value = inputText.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "");
+            inputTranscription.value = inputTranscription.value.replace(/[<|>|{|}|\/\\;_\.=]/gi, "");
+            inputTranslation.value = inputTranslation.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "");
+
+            inputExamples.value = inputExamples.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "")
+                .split("\n").filter(p => p != "").join("*");
         }
     }
     submitButton.addEventListener("click", submitButtonCallback);
-
 </script>

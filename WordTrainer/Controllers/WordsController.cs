@@ -29,7 +29,8 @@ namespace WordTrainer.Controllers
         {
             if(ModelState.IsValid)
             {
-                //if (repository.Words.Where(p => p.Text.Trim() == word.Text.Trim()).Count() == 0) 
+                word.Text = word.Text.Trim();
+
                     repository.Add(word);
             }
             return RedirectToAction("List");

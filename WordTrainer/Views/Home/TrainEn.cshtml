@@ -69,24 +69,7 @@
 
 
 
-<button class="btn btn-primary" onclick="myfunction()">Load</button>
 <script>
-    @*var res;
-    async function myfunction() {
-        var res = await fetch('@Url.Action("Train3000En", "Home")', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(function (response) {
-                return response.json();
-            });
-            
-        
-        console.log(res[0]['text']);
-    }*@
-
     // Set date from Model to localStorage
     localStorage.clear();
     var model = '@Json.Serialize(@Model)';
@@ -232,6 +215,10 @@
     // Adds EventListener for 'btnExample'
     btnExample.addEventListener("click", function (event) {
         toolTip.innerHTML = "";
-        arr[counter].examples.split(".").filter(p => p !== " ").forEach(p => toolTip.innerHTML += `<p><span>&#10004;</span> ${p.trim() === "" ? "There are not more examples" : p.trim()}</p>`);
+        var temp = arr[counter].examples.split("*").filter(p => p !== " ");
+        for (var i = 0; i < temp.length; i += 2) {
+            let str = temp[i].trim() + " - " + temp[i + 1].trim();
+            toolTip.innerHTML += `<p><span>&#10004;</span> ${str.trim() === "" ? "There are not more examples" : str.trim()}</p>`;
+        }
     });
 </script>

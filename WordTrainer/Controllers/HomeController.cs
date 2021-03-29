@@ -42,7 +42,19 @@ namespace WordTrainer.Controllers
         [HttpGet]
         public IActionResult TrainRu() => View(repository.Words.ToList());
 
-        public VirtualFileResult Train3000En()
+        /// <summary>
+        /// Trainer from English to Russian
+        /// </summary>
+        [HttpGet]
+        public IActionResult Train3000Ru() => View(repository.Words.ToList());
+        
+        /// <summary>
+        /// Trainer from English to Russian
+        /// </summary>
+        [HttpGet]
+        public IActionResult Train3000En() => View(repository.Words.ToList());
+
+        public VirtualFileResult Train3En()
         {
             var filepath = Path.Combine("~/Content", "oxford_3000.json");
             return File(filepath, "text/plain", "hello.txt");
