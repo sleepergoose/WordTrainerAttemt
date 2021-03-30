@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WordTrainer.Models
 {
+    [Serializable]
     public class Word
     {
         [Key, Required]

@@ -37,14 +37,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLiveLabel">Submit Modal</h5>
+                <h5 class="modal-title font-weight-bold" id="exampleModalLiveLabel">Submit Modal</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p id="modalTranslation">Translation</p>
                 <p id="modalTranscription">Transcription</p>
+                <p id="modalTranslation" class="font-weight-bold">Translation</p>
                 <p id="modalExamples">Examples</p>
             </div>
 
@@ -69,15 +69,20 @@
     $(document).ready(function () {
 
         $('#submitButton').click(function () {
-            var exampleModalLiveLabel = document.getElementById("exampleModalLiveLabel");
-            var modalTranslation = document.getElementById("modalTranslation");
-            var modalExamples = document.getElementById("modalExamples");
-            var modalTranscription = document.getElementById("modalTranscription");
+            if (text.value == "" || translation.value == "") {
+                event.preventDefault();
+            }
+            else {
+                var exampleModalLiveLabel = document.getElementById("exampleModalLiveLabel");
+                var modalTranslation = document.getElementById("modalTranslation");
+                var modalExamples = document.getElementById("modalExamples");
+                var modalTranscription = document.getElementById("modalTranscription");
 
-            exampleModalLiveLabel.innerText = text.value;
-            modalTranslation.innerText = translation.value;
-            modalExamples.innerText = examples.value;
-            modalTranscription.innerText = transcription.value;
+                exampleModalLiveLabel.innerText = text.value;
+                modalTranslation.innerText = translation.value;
+                modalExamples.innerText = examples.value;
+                modalTranscription.innerText = `[${transcription.value}]`;
+            }
         });
 
         $('#btnModalAdmit').click(function () {
@@ -89,14 +94,14 @@
             dataType: "html",
             success: function (data) {
                 result = $.parseJSON(data);
-                //console.log(result);
+                text.setAttribute("placeholder", "Saved");
                 text.value = "";
                 examples.value = "";
                 translation.value = "";
                 transcription.value = "";
             },
             failure: function () {
-                console.log("error");
+                text.setAttribute("placeholder", "Error: not saved");
             }
         });
         });
@@ -122,15 +127,15 @@
 
     // Checking
     function submitButtonCallback(event) {
-        if (inputText.value == "" || inputTranslation.value == "" || inputExamples.value == "") {
+        if (inputText.value == "" || inputTranslation.value == "") {
             event.preventDefault();
         }
         else {
-            inputText.value = inputText.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "");
-            inputTranscription.value = inputTranscription.value.replace(/[<|>|{|}|\/\\;_\.=]/gi, "");
-            inputTranslation.value = inputTranslation.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "");
+            inputText.value = inputText.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "").replace(/[\"]/gi, "'");
+            inputTranscription.value = inputTranscription.value.replace(/[<|>|{|}|\/\\;_\.=]/gi, "").replace(/[\"]/gi, "'");
+            inputTranslation.value = inputTranslation.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "").replace(/[\"]/gi, "'");
 
-            inputExamples.value = inputExamples.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "")
+            inputExamples.value = inputExamples.value.replace(/[<|>|\[|\]|(|)|{|}|\/\\;:_\.=]/gi, "").replace(/[\"]/gi, "'")
                 .split("\n").filter(p => p != "").join("*");
         }
     }

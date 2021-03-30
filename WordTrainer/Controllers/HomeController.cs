@@ -28,7 +28,7 @@ namespace WordTrainer.Controllers
         /// <summary>
         /// Main (Home) page
         /// </summary>
-        public IActionResult Index() => View(repository.Words);
+        public IActionResult Index() => View(repository.Words.ToList());
 
         /// <summary>
         /// Trainer from English to Russian
@@ -53,6 +53,7 @@ namespace WordTrainer.Controllers
         /// </summary>
         [HttpGet]
         public IActionResult Train3000En() => View(repository.Words.ToList());
+
 
         public VirtualFileResult Train3En()
         {
