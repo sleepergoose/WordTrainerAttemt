@@ -11,16 +11,16 @@
     <h3 id="wordBox"></h3>
     <span id="transcriptionBox"> </span>
     <hr />
-    <p id="translationBox" class="font-italic text-justify"></p>
+    <p id="translationBox" class="font-italic text-left"></p>
     <p name="title" class="font-italic d-none">Examples:</p>
-    <div id="examplesBox" class="text-justify"></div>
+    <div id="examplesBox" class="text-left"></div>
 </div>
 
 
 
 <script type="module">
 
-    import { Word } from '/script.js';
+    import { Word } from '/js/script.js';
     // Gets data from local storage
     var temp = JSON.parse(localStorage.getItem("model"));
     // var arr = [];
@@ -69,16 +69,24 @@
                 wordBox.innerHTML = word.text;
                 translationBox.innerHTML = "<span>&#10004;</span>" + word.translation;
 
-                transcriptionBox.innerHTML = ` [${word.transcription}]`;
+                transcriptionBox.innerHTML = (function () {
+                    if (word.transcription != null) {
+                        return `[${word.transcription}]`;
+                    }
+                    return "";
+                })();
 
                 examplesBox.innerHTML = (function () {
-                    var res = "";
-                    var examples = word.examples.split("*").filter(p => p.length > 1);
-                    for (var i = 0; i < examples.length; i += 2) {
-                        let str = examples[i].trim() + " - " + examples[i + 1].trim();
-                        res += `<p><span>&#10004;</span> ${str.trim() === "" ? "There are not more examples" : str.trim()}</p>`;
-                    }
-                    return res;
+                    if (word.examples != null){
+                        var res = "";
+                        var examples = word.examples.split("*");
+                        for (var i = 0; i < examples.length; i += 2) {
+                            let str = examples[i].trim() + " - " + examples[i + 1].trim();
+                            res += `<p><span>&#10004;</span> ${str.trim() === "" ? "There are not more examples" : str.trim()}</p>`;
+                        }
+                        return res;
+                    }   
+                    return "There is no any examples";
                 })();
                 wordPresenter.setAttribute("style", "display:block");
                 searchBox.value = "";

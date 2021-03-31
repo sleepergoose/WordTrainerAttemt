@@ -1,17 +1,27 @@
 ﻿@model WordTrainer.Models.Word
 
 <div class="container top-5">
-    <span><b>@Model.Text </b><span> [@Model.Transcription]</span></span>
+    <span><b>@Model.Text </b><span> 
+         @{ 
+            if(Model.Transcription != null)
+            {
+                @:[@Model.Transcription]
+            }
+         }
+         </span></span>
     <h6><i>@Model.Translation</i></h6>
     @{
-        var examples = Model.Examples.Split("*").Select(ex => ex.Trim()).Where(p => p != "");
-        var eng = examples.Where((p, index) => ((index + 1) & 0b1) == 1).ToArray();
-        var rus = examples.Where((p, index) => (index & 0b1) == 1).ToArray();
-
-        int n = Math.Min(eng.Count(), rus.Count());
-        for (int i = 0; i < n; i++)
+        if (Model.Examples != null)
         {
-            <span class="">&#10004;@eng[i] - @rus[i]</span><br />
+            var examples = Model.Examples.Split("*").Select(ex => ex.Trim()).Where(p => p != "");
+            var eng = examples.Where((p, index) => ((index + 1) & 0b1) == 1).ToArray();
+            var rus = examples.Where((p, index) => (index & 0b1) == 1).ToArray();
+
+            int n = Math.Min(eng.Count(), rus.Count());
+            for (int i = 0; i < n; i++)
+            {
+                <span class="">&#10004;@eng[i] - @rus[i]</span><br />
+            }
         }
     }
 </div> 
