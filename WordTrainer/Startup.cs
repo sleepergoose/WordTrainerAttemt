@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,9 +29,10 @@ namespace WordTrainer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var str = Configuration.GetValue<string>("WordsTrainerDatabase:ConnectionString");
+            var str = Configuration.GetValue<string>("WordsTrainerDatabaseTest:ConnectionString");
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(str));
             services.AddTransient<IWordRepository, EFWordRepository>();
+            services.AddTransient<UrlHelperFactory>();
             // services.AddSingleton<IWordRepository, FakeRepository>();
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
@@ -53,7 +55,17 @@ namespace WordTrainer
 
             app.UseStatusCodePages();    
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: null,
+                    template: "{controller}/{action}/{letter?}");
+
+                routes.MapRoute(
+                    name: null,
+                    template:"{controller}/{action}",
+                    defaults: new { controller = "Home", action = "Index" });
+            });
         }
     }
 }

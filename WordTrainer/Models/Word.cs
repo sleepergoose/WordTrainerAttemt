@@ -9,14 +9,28 @@ namespace WordTrainer.Models
     {
         [Key, Required]
         public int WordID { get; set; }
+
         [Required]
         [MaxLength(100)]
+        [UIHint("Text")]
+        [Display(Name = "Word")]
+        // [DisplayFormat(DataFormatString = "{0:3}", ApplyFormatInEditMode = true)]
         public string Text { get; set; }
+
         [MaxLength(100)]
+        [UIHint("Text")]
+        [Display(Name = "Transcription")]
         public string Transcription { get; set; }
+
         [MaxLength(300)]
+        [UIHint("Text")]
+        [Display(Name = "Translations")]
         public string Translation { get; set; }
+
         [MaxLength(1000)]
+        [UIHint("Text")]
+        [Display(Name = "Examples")]
+
         public string Examples { get; set; }
         public bool? Favourite { get; set; } = false;
         public bool? IsForgoten { get; set; } = false;

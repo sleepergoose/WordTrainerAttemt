@@ -11,41 +11,48 @@ namespace WordTrainer.Controllers
     public class WordsController : Controller
     {
         IWordRepository repository;
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public WordsController(IWordRepository repo)
         {
             repository = repo;
         }
 
+        /// <summary>
+        /// List of all the words in the storage
+        /// </summary>
         [HttpGet]
-        public IActionResult List() => View(repository.Words);
+        [Route("Words/List/{letter?}")]
+        public IActionResult List(string letter = "a")
+        {
+            return View(repository.Words.Where(w => w.Text[0].ToString().ToLower() == letter.ToLower()));
+        }
         
-        // Add word section
+        /// <summary>
+        /// Adds new word GET
+        /// </summary>
         [HttpGet]
         public IActionResult AddWord() => View();
 
+        /// <summary>
+        /// Adds new word GET
+        /// </summary>
         [HttpPost]
-        public IActionResult AddWord(Word word)
-        {
-            if(ModelState.IsValid)
-            {
-                word.Text = word.Text.Trim();
-
-                    repository.Add(word);
-            }
-            return RedirectToAction("List");
-        }
-
-        // Search word section
-        [HttpGet]
-        public IActionResult Search() => View();
-
-
-        [HttpPost]
-        public bool Add(Word name)
+        [ValidateAntiForgeryToken]
+        public bool AddWord(Word name)
         {
             repository.Add(name);
             return true;
         }
+
+        /// <summary>
+        /// Searches a word
+        /// </summary>
+        [HttpGet]
+        public IActionResult Search() => View();
+
+
+
     }
 }

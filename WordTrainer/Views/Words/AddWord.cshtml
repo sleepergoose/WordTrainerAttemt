@@ -5,25 +5,25 @@
 
     <h3 class="h3 text-center">Add new word right here</h3>
 
-    <form id="addForm" method="post">
+    <form id="addForm" method="post" asp-antiforgery="true">
         <div class="form-group">
-            <label asp-for="Text">Word</label>
-            <input class="form-control" type="text" name="Text" asp-for="Text" />
+            <label asp-for="Text"></label>
+            <input class="form-control" type="text" asp-for="Text" />
         </div>
 
         <div class="form-group">
-            <label asp-for="Transcription">Transcription</label>
-            <input class="form-control" type="text" name="Transcription" asp-for="Transcription" />
+            <label asp-for="Transcription"></label>
+            <input class="form-control" type="text" asp-for="Transcription" />
         </div>
 
         <div class="form-group">
-            <label asp-for="Translation">Translation</label>
-            <input class="form-control" type="text" name="Translation" asp-for="Translation" />
+            <label asp-for="Translation"></label>
+            <input class="form-control" type="text" asp-for="Translation" />
         </div>
 
         <div class="form-group">
-            <label asp-for="Examples">Examples</label>
-            <textarea name="Examples" cols="50" class="form-control" rows="4" asp-for="Examples"></textarea>
+            <label asp-for="Examples"></label>
+            <textarea cols="50" class="form-control" rows="4" asp-for="Examples"></textarea>
         </div>
 
         <div class="form-group">
@@ -88,7 +88,7 @@
         $('#btnModalAdmit').click(function () {
           $.ajax({
 
-            url: "@Url.Action("Add", "Words")",
+            url: "@Url.Action("AddWord", "Words")",
             type: "POST",
               data: $('#addForm').serialize(),
             dataType: "html",
